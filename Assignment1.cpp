@@ -10,8 +10,24 @@ struct seit
 
     };
 
-
-int main(){
+void bubblesort(seit s1[],int n)
+{
+    for(int i=0;i<n-1;i++)
+    {
+        for(int j=0;j<n-i-1;j++)
+        {
+            if(s1[j].roll>s1[j+1].roll)
+            {
+                seit x;
+                x = s1[j];
+                s1[j] = s1[j+1];
+                s1[j+1] = x;
+            }
+        }
+    }
+}
+int main()
+{
     
 
     int n;
@@ -20,12 +36,24 @@ int main(){
 
     seit s1[n],x;
     //Taking input
-    for(int i=0; i<n;i++){
+    for(int i=0; i<n;i++)
+    {
         cout<<"Entry number "<<i+1<<"."<<endl;
         cout<<"Enter your roll no. -> ";
         cin>>s1[i].roll;
+        for(int j=0;j<i;j++)
+        {
+            while(s1[i].roll==s1[j].roll){
+                cout<<"Enter valid roll no. -> ";
+                cin>>s1[i].roll;
+            }
+        }
         cout<<"Enter your CGPA -> ";
         cin>>s1[i].sgpa;
+        while(s1[i].sgpa>10 && s1[i].sgpa>=0){
+            cout<<"Enter valid sgpa -> ";
+            cin>>s1[i].sgpa;
+        }
         cout<<"Enter your name -> ";
         cin>>s1[i].name;
     }
@@ -34,39 +62,36 @@ int main(){
     cout<<endl;
     cout<<"Before sorting -> "<<endl;
 
-    for(int i=0;i<n;i++){
+    for(int i=0;i<n;i++)
+    {
         cout<<"Roll no. -> "<<s1[i].roll<<" Name -> "<<s1[i].name<<" GPA -> "<<s1[i].sgpa<<endl;
     }
 
-    //Sorting w.r.t. rollno.
-    for(int i=0;i<n-1;i++){
-        for(int j=0;j<n-i-1;j++){
-            if(s1[j].roll>s1[j+1].roll){
-                x = s1[j];
-                s1[j] = s1[j+1];
-                s1[j+1] = x;
-            }
-        }
-    }
+    bubblesort(s1,n);
 
     //Displaying sorted data
     cout<<endl;
-    cout<<"Sorted list with respect to  roll no. is -> "<<endl;
+    cout<<"Sorted list using bubble sort with respect to  roll no. is -> "<<endl;
 
-    for(int i=0;i<n;i++){
+    for(int i=0;i<n;i++)
+    {
         cout<<"Roll no. -> "<<s1[i].roll<<" Name -> "<<s1[i].name<<" GPA -> "<<s1[i].sgpa<<endl;
     }
 
     cout<<endl;
     cout<<"list of students when arranged with same CGPA "<<endl;
-
-    for(int i=0;i<n;i++){
-        if(s1[i].check){
+    //displaying students having same sgpa
+    for(int i=0;i<n;i++)
+    {
+        if(s1[i].check)
+        {
             cout<<"Roll no. -> "<<s1[i].roll<<" Name -> "<<s1[i].name<<" GPA -> "<<s1[i].sgpa<<endl;
         }
-        for(int j=i+1;j<n;j++){
+        for(int j=i+1;j<n;j++)
+        {
             
-            if(s1[i].sgpa==s1[j].sgpa){
+            if(s1[i].sgpa==s1[j].sgpa)
+            {
                 s1[j].check = false;
                 cout<<"Roll no. -> "<<s1[j].roll<<" Name -> "<<s1[j].name<<" GPA -> "<<s1[j].sgpa<<endl;
             }
@@ -74,9 +99,12 @@ int main(){
     }
 
     //Sorting w.r.t. name
-    for(int i=0;i<n-1;i++){
-        for(int j=0;j<n-1-i;j++){
-            if(s1[j].name > s1[j+1].name){
+    for(int i=0;i<n-1;i++)
+    {
+        for(int j=0;j<n-1-i;j++)
+        {
+            if(s1[j].name > s1[j+1].name)
+            {
                 x = s1[j];
                 s1[j]=s1[j+1];
                 s1[j+1]=x;
@@ -87,11 +115,12 @@ int main(){
     cout<<endl;
     cout<<"Sorted list with respect to name is -> "<<endl;
 
-    for(int i=0;i<n;i++){
+    for(int i=0;i<n;i++)
+    {
         cout<<"Roll no. -> "<<s1[i].roll<<" Name -> "<<s1[i].name<<" GPA -> "<<s1[i].sgpa<<endl;
     }
 
-    //Finding element using binary search 
+    cout<<"Finding element using binary search "<<endl;
     int l=0,h=n-1,m,po;
     string key;
     cout<<endl;
@@ -99,23 +128,56 @@ int main(){
     cin>>key;
     bool f = false;
     
-    while(l<=h){
+    while(l<=h)
+    {
         m = (l+h)/2;
-        if(s1[m].name == key){
+        if(s1[m].name == key)
+        {
             po = m;
             f = true;
             break;
-        }else if(s1[m].name > key){
+        }
+        else if(s1[m].name > key)
+        {
             h = m-1;
-        }else if(s1[m].name < key){
+        }
+        else if(s1[m].name < key)
+        {
             l = m+1;
         }
     }
     cout<<endl;
-    if(f){
+    if(f)
+    {
         cout<<key<<" is present in list and it's roll no. is -> "<<s1[po].roll<<endl;
-    }else{
+    }
+    else
+    {
         cout<<key<<" is not present in list "<<endl;
+    }
+
+    cout<<endl;
+    
+    for(int i=1;i<n;i++)
+    {
+        int j=i-1;
+        seit x = s1[i];
+        while(s1[j].sgpa>x.sgpa && j>=0)
+        {
+            s1[j+1]=s1[j];
+            j--;
+        }
+        s1[j+1]=x;
+    }
+
+    int i=n-1;
+    int j=0;
+    cout<<"List of Top 10 students using insertion sort ->"<<endl;
+    while(j<10 && i>=0)
+    {
+        cout<<"Roll no. -> "<<s1[i].roll<<" Name -> "<<s1[i].name<<" GPA -> "<<s1[i].sgpa<<endl;
+        i--;
+        j++;
     }
 
     return 0;
