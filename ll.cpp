@@ -133,3 +133,19 @@ int main()
     
     return 0;
 }
+
+
+
+/*
+
+Problem Statement:
+Consider the database of SE IT class at least 15 records the database contains different fields like SGPA, Name,
+Roll No,
+a) Design the Roll call list and arrange it in ascending order using Bubble Sort
+b) Arrange list of students in alphabetically increasing order using insertion sort
+c) Arrange list of students to find 1st 10 toppers of class using Quick sort
+d) Search students according to SGPA if more than 2 students having same SGPA print all.
+e) Search a particular student according to name using binary search 
+
+
+*/
