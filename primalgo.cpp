@@ -29,13 +29,59 @@ class graphmat{
         }
         return -1;
     }
+    vector<int> minnode(int x){
+        // int n,i ,mw=0;
+        // int r = getnode();
+        // for(int i=0;i<mat[0].size();i++){
+        //     if(mat[r][i]>0){
+        //         mw = mat[r][i];
+        //     }
+        // }
+        // if(mw==0){
+        //     return -1;
+        // }
+        // for(i=0;i<mat[0].size();i++){
+        //     if(mat[x][i] != 0){
+        //         if(mat[x][i]<mw){
+        //             mw = mat[x][i];
+        //         }
+        //     }
+        // }
+        // for(i=0;i<mat[0].size();i++){
+        //     if(mw == mat[x][i])
+        //     return i;
+        // }
+        // return -1;
+        vector<int> order = mat[x];
+        sort(order.begin(), order.end());
+        return order;
+    }
+
+    int getnodeindex(int i, int w){
+        for(int j=0;j<mat[i].size();j++){
+            if(mat[i][j] == w){
+                return j;
+            }
+        }
+        return -1;
+    }
     vector<vector<int>> spantr(){
+        int next;
         int size = mat.size();
         vector<int> temp(size, 0);
         vector<vector<int>> tr(size, temp);
         vector<int> visited;
         int r = getnode();
-        
+        visited.push_back(r);
+        int j=0;
+        while(j<mat.size()){
+            
+        }
+        if(count(visited.begin(), visited.end(), next) < 0){
+
+        }
+
+
     }
 
 };
